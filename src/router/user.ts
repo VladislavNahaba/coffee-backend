@@ -10,8 +10,9 @@ export const userRouter: Router = express.Router();
 
 // Register customer
 userRouter.post("/register", async (req: UserDTO, res: Response) => {
-  const membership = req.body.membership;
-  if (!membership) return res.status(404).send("Not found membership");
+  const { membership, name } = req.body;
+  if (!membership) return res.status(404).end("Not found membership");
+  if (!name) return res.status(404).end("No name detected");
 
   const memberEntity = await dataSource.getRepository(Membership).findOne({
     where: {
@@ -21,7 +22,7 @@ userRouter.post("/register", async (req: UserDTO, res: Response) => {
   if (memberEntity) {
     try {
       const user = dataSource.getRepository(User).create({
-        name: req.body.name,
+        name: name,
         membership: memberEntity,
       });
       const results = await dataSource.getRepository(User).save(user);
