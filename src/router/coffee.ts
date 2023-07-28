@@ -61,8 +61,8 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
           endDate: new Date(new Date().setHours(22, 30, 0, 0)),
         })
         .andWhere("order.user.id = :userId", { userId: user?.id })
-        .andWhere("coffee.id = :id", {
-          id: currentQoutaForRequestedCofffee.coffee.id,
+        .andWhere("coffee.type = :coffee", {
+          coffee: currentQoutaForRequestedCofffee.coffee.type,
         })
         .getMany();
     } else if (currentQoutaForRequestedCofffee?.type === "hourly") {
