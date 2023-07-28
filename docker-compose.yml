@@ -14,7 +14,8 @@ services:
       - "6000:5432"
   web:
     build: .
-    command: bash -c "npm run db:create && npm run seed && npm run dev"
+    container_name: coffee-backend-web
+    command: bash -c "npm run dev"
     volumes:
       - .:/code
     ports:
