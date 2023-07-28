@@ -8,5 +8,3 @@ export class Coffee {
   @Column()
   type!: "Cappuccino" | "Espresso" | "Americano";
 }
-
-// type Coffee = "Cappuccino" | "Espresso" | "Americano";

@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import { Coffee } from "../entity/coffee.entity";
 
 export default class CoffeeSeeder implements Seeder {
-  public async run(dataSource: DataSource): Promise<any> {
+  public async run(dataSource: DataSource): Promise<void> {
     const repository = dataSource.getRepository(Coffee);
 
     await repository.insert([

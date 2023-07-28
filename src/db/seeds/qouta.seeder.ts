@@ -5,7 +5,7 @@ import { Membership } from "../entity/membership.entity";
 import { Coffee } from "../entity/coffee.entity";
 
 export default class QuotaSeeder implements Seeder {
-  public async run(dataSource: DataSource): Promise<any> {
+  public async run(dataSource: DataSource): Promise<void> {
     const repository = dataSource.getRepository(Quota);
     const membershipRepository = dataSource.getRepository(Membership);
     const coffeeRepository = dataSource.getRepository(Coffee);

@@ -15,9 +15,3 @@ export class Membership {
   @OneToMany(() => Quota, (quota) => quota.membership)
   quotas!: Quota[];
 }
-
-// type Membership = {
-//     name: string;
-//     id: "basic" | "coffee-lover" | "americano-maniac";
-//     quotas: Quota[];
-//   };

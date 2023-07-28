@@ -26,9 +26,3 @@ export class Quota {
   @ManyToOne(() => Membership, (membership) => membership.quotas)
   membership!: Membership;
 }
-
-// type Quota = {
-//     coffee: Coffee;
-//     type: "hourly" | "daily";
-//     amount: number;
-//   };

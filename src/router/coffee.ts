@@ -31,6 +31,7 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
       .leftJoinAndSelect("quotas.coffee", "coffee")
       .where("user.id = :id", { id: Number(userId) })
       .getOne();
+    if (!user) return res.status(404).send("User not found");
 
     // find membership
     const userMembership =
@@ -116,6 +117,6 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
       res.status(200).end(coffee);
     }
   } catch (e) {
-    res.status(404).send("User not found");
+    res.status(404).send(e);
   }
 });

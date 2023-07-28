@@ -25,10 +25,3 @@ export class Order {
   @CreateDateColumn()
   created_at!: Date;
 }
-
-// type Order = {
-//     id: string;
-//     coffee: Coffee;
-//     userId: User["id"];
-//     date: Date;
-//   };

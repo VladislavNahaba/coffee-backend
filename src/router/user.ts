@@ -28,7 +28,7 @@ userRouter.post("/register", async (req: UserDTO, res: Response) => {
 
       return res.send(results);
     } catch (e) {
-      res.status(400).send("This user already exist");
+      res.status(400).send(e);
     }
   }
 });
