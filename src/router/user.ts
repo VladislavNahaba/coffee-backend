@@ -10,9 +10,10 @@ export const userRouter: Router = express.Router();
 
 // Register customer
 userRouter.post("/register", async (req: UserDTO, res: Response) => {
+  // here we can use cookies to get this data and token, but i've did it like it was in task description
   const { membership, name } = req.body;
-  if (!membership) return res.status(404).end("Not found membership");
-  if (!name) return res.status(404).end("No name detected");
+  if (!membership) return res.status(400).end("Not found membership");
+  if (!name) return res.status(400).end("No name detected");
 
   const memberEntity = await dataSource.getRepository(Membership).findOne({
     where: {

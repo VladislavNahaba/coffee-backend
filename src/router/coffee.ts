@@ -4,6 +4,7 @@ import { dataSource } from "../db/app-data-source";
 import { Membership } from "../db/entity/membership.entity";
 import { User } from "../db/entity/user.entity";
 import { Order } from "../db/entity/order.entity";
+import { QuotaTypeHourly, QoutaTypeDaily } from "../db/entity/quota.entity";
 import { coffeeDTO } from "../dto/coffee.dto";
 
 import { humanize } from "../helpers/duration";
@@ -50,7 +51,7 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
     let previousedTodayOrders: Order[] = [];
 
     // get previous orders for current user
-    if (currentQoutaForRequestedCofffee?.type === "daily") {
+    if (currentQoutaForRequestedCofffee?.type === QoutaTypeDaily) {
       previousedTodayOrders = await orderRepository
         .createQueryBuilder("order")
         .leftJoinAndSelect("order.coffee", "coffee")
@@ -65,7 +66,7 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
           coffee: currentQoutaForRequestedCofffee.coffee.type,
         })
         .getMany();
-    } else if (currentQoutaForRequestedCofffee?.type === "hourly") {
+    } else if (currentQoutaForRequestedCofffee?.type === QuotaTypeHourly) {
       previousedTodayOrders = await orderRepository
         .createQueryBuilder("order")
         .leftJoinAndSelect("order.coffee", "coffee")
@@ -85,7 +86,7 @@ coffeeRouter.post("/buy", async (req: coffeeDTO, res: Response) => {
       previousedTodayOrders.length
     ) {
       let waitTime = 0;
-      if (currentQoutaForRequestedCofffee?.type === "daily") {
+      if (currentQoutaForRequestedCofffee?.type === QoutaTypeDaily) {
         // get tomorrow open date
         const tomorrowOpen = new Date(
           new Date().setDate(new Date().getDate() + 1)
