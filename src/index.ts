@@ -23,7 +23,7 @@ const app: Express = express();
 app.use(express.json());
 app.use(cors());
 app.use("/users", userRouter);
-app.use("/qouta", qoutaRouter);
+app.use("/quota", qoutaRouter);
 app.use("/coffee", coffeeRouter);
 
 const port = process.env.PORT;
